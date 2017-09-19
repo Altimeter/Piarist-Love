@@ -17,6 +17,11 @@ function love.update(dt)
 		x = x - xchange
 	end
 
+	if love.keyboard.isDown("1") and love.keyboard.isDown("3")
+		then
+			love.event.quit()
+		end
+
 end
 
 function love.draw(dt)
