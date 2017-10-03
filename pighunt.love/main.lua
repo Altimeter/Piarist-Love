@@ -4,6 +4,8 @@ function love.load(arg)
 
 	x = 0
 	y = 0
+	playerx = 50
+	playery = 50
 	xchange = 5
 	ychange = 5
 	ymin = 200
@@ -11,7 +13,7 @@ function love.load(arg)
 	ymax = love.window.getHeight() - 200
 	xmax = love.window.getWidth() - 200
 	intensify = 0
-	intensifymax = 10000
+	intensifymax = 100
 end
 
 function love.update(dt)
@@ -73,15 +75,7 @@ function love.update(dt)
 end
 
 function love.draw(dt)
-	love.graphics.setColor(255,0,0)
-	love.graphics.circle("fill", x, y, 60, 60)
-	love.graphics.setColor(0,255,0)
-	love.graphics.circle("fill", 200+x, y+200, 60, 60)
-	love.graphics.setColor(0,255,255)
-	love.graphics.circle("fill", x-200, y-200, 60, 60)
-	love.graphics.setColor(255,0,255)
-	love.graphics.circle("fill", x+200, y-200, 60, 60)
-	love.graphics.setColor(0,0,255)
-	love.graphics.circle("fill", x-200, y+200, 60, 60)
+	love.graphics.setColor(255,170,170)
+	love.graphics.circle("fill", playerx, playery, 30, 30)
 
 end
