@@ -6,10 +6,11 @@ function love.load(arg)
 	y = 0
 	xchange = 5
 	ychange = 5
-	ymin = 200
-	xmin = 200
-	ymax = love.window.getHeight() - 200
-	xmax = love.window.getWidth() - 200
+	circsize = 60
+	ymin = circsize
+	xmin = circsize
+	ymax = love.window.getHeight() - circsize 
+	xmax = love.window.getWidth() - circsize 
 	intensify = 0
 	intensifymax = 10000
 end
@@ -26,10 +27,10 @@ function love.update(dt)
 
 	if love.keyboard.isDown("up")
 		then
-		y = y - xchange
+		y = y - ychange
 	elseif love.keyboard.isDown("down")
 		then
-		y = y + xchange
+		y = y + ychange
 	end
 
 	if love.keyboard.isDown("1") and love.keyboard.isDown("3")
@@ -74,14 +75,5 @@ end
 
 function love.draw(dt)
 	love.graphics.setColor(255,0,0)
-	love.graphics.circle("fill", x, y, 60, 60)
-	love.graphics.setColor(0,255,0)
-	love.graphics.circle("fill", 200+x, y+200, 60, 60)
-	love.graphics.setColor(0,255,255)
-	love.graphics.circle("fill", x-200, y-200, 60, 60)
-	love.graphics.setColor(255,0,255)
-	love.graphics.circle("fill", x+200, y-200, 60, 60)
-	love.graphics.setColor(0,0,255)
-	love.graphics.circle("fill", x-200, y+200, 60, 60)
-
+	love.graphics.circle("fill", x, y, circsize, circsize)
 end
