@@ -1,0 +1,24 @@
+Pig Hunt Notes
+
+Idea/Goal: Don't let the wolf catch you.
+
+
+Pacman Style Maze
+
+
+Maze, trying to get to safe spot.
+
+Wolves have to go around walls, you can go through them.
+
+
+Levels include walls, fire, safe zone, wolves
+
+Wolves faster than player, player has more move options.
+
+Top down view.
+
+
+
+
+
+

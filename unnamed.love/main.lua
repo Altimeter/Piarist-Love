@@ -2,78 +2,133 @@ debug = true
 
 function love.load(arg)
 
-	x = 0
+	x = 50
 	y = 0
+	badspeed = 5
+	dy = 0
+	g = 1
+	jumpPower = 35
 	xchange = 5
 	ychange = 5
-	circsize = 60
+	circsize = 30
 	ymin = circsize
 	xmin = circsize
-	ymax = love.window.getHeight() - circsize 
+	ymax = love.window.getHeight() - 2*circsize 
 	xmax = love.window.getWidth() - circsize 
-	intensify = 0
-	intensifymax = 10000
+	badx = xmax
+	bady = ymax
+	shootx = 75
+	shooty = 75
+	shootsize = 7
+	shootlive = false
+	shootspeed = 15
+	gameon = false
+	credits = 0
+	canAcceptCredits = false
 end
 
 function love.update(dt)
-
-	if love.keyboard.isDown("right")
-		then
-		x = x + xchange
-	elseif love.keyboard.isDown("left")
-		then
-		x = x - xchange
-	end
-
-	if love.keyboard.isDown("up")
-		then
-		y = y - ychange
-	elseif love.keyboard.isDown("down")
-		then
-		y = y + ychange
-	end
 
 	if love.keyboard.isDown("1") and love.keyboard.isDown("3")
 		then
 			love.event.quit()
 		end
-	
 
-	if love.keyboard.isDown("=") and intensify < intensifymax
-		then 
-		 	intensify = intensify + 1
-		elseif love.keyboard.isDown("-") and intensify > 0
-			then
-				intensify = intensify - 1
-			end
-
-	x = x + love.math.random(-intensify, intensify)
-	y = y + love.math.random(-intensify, intensify)
-
-	if y < ymin
+	if love.keyboard.isDown("4")
 		then
-			y = ymin
-		end
-
-		if x < xmin
-			then
-			x = xmin
+			if canAcceptCredits == true
+				then
+					credits = credits + 1
+					canAcceptCredits = false
+				end
+		else
+			canAcceptCredits = true
 		end
 	
-		if x > xmax
+	
+	if gameon == true
+		then
+
+		if y >= ymax
 			then
-				x = xmax
+				y = ymax
+				dy = 0
+				if love.keyboard.isDown("up")
+					then
+						dy = -jumpPower
+					end
+
+			else
+				dy = dy + g
 			end
 
-			if y > ymax
-				then
-					y = ymax
-				end
+		y = y + dy
+		dy = dy + g
+	
 
+		if y < ymin
+			then
+				y = ymin
+			end
+
+		if love.keyboard.isDown(" ") and shootlive == false
+			then
+				shootlive = true
+				shootx = x
+				shooty = y + circsize
+			end
+
+		if shootlive == true
+			then
+				if shootx > xmax + circsize
+				then
+					shootlive = false
+				else
+					shootx = shootx + shootspeed
+				end
+			end
+
+		if badx < xmin - circsize
+			then
+				badx = xmax + circsize
+				bady = love.math.random(ymin, ymax)
+			else
+				badx = badx - badspeed
+			end
+		if (shooty-bady)^2 + (shootx-badx)^2 < (shootsize + circsize)^2
+			then
+				shootlive = false
+				badx = -50
+			end
+
+
+		else
+		if love.keyboard.isDown("5") and credits > 0
+			then
+			gameon = true
+			credits = credits - 1
+		end
+	end
 
 end
 
 function love.draw(dt)
-	love.graphics.setColor(255,0,0)
-	love.graphics.circle("fill", x, y, circsize, circsize)
+
+	love.graphics.setColor(255,255,255)
+	love.graphics.print("Credits: ", 0, 0)
+	love.graphics.print(credits, 60, 0)
+
+	if gameon == true
+		then
+		love.graphics.setColor(255,0,0)
+		love.graphics.rectangle("fill", x, y, circsize, 2*circsize)
+		love.graphics.setColor(0,255,255)
+		love.graphics.circle("fill", badx, bady, circsize, circsize)
+		if shootlive == true
+			then
+				love.graphics.setColor(255,255,0)
+				love.graphics.circle("fill", shootx, shooty, shootsize, shootsize)
+			end
+
+	end
 end
