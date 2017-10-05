@@ -6,8 +6,8 @@ function love.load(arg)
 	y = 0
 	badspeed = 5
 	dy = 0
-	g = 1
-	jumpPower = 35
+	g = 0.01
+	jumpPower = 5
 	xchange = 5
 	ychange = 5
 	circsize = 30
@@ -69,6 +69,7 @@ function love.update(dt)
 		if y < ymin
 			then
 				y = ymin
+				dy = 0
 			end
 
 		if love.keyboard.isDown(" ") and shootlive == false
@@ -122,7 +123,7 @@ function love.draw(dt)
 		then
 		love.graphics.setColor(255,0,0)
 		love.graphics.rectangle("fill", x, y, circsize, 2*circsize)
-		love.graphics.setColor(0,255,255)
+		love.graphics.setColor(255,180,180)
 		love.graphics.circle("fill", badx, bady, circsize, circsize)
 		if shootlive == true
 			then
