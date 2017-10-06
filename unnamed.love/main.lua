@@ -2,12 +2,12 @@ debug = true
 
 function love.load(arg)
 
-	x =50
-        y = 0
+	x = 50
+	y = 0
 	badspeed = 5
 	dy = 0
-	g = 0.06
-	jumpPower = 15
+	g = 0.01
+	jumpPower = 5
 	xchange = 5
 	ychange = 5
 	circsize = 30
@@ -19,12 +19,11 @@ function love.load(arg)
 	bady = ymax
 	shootx = 75
 	shooty = 75
-	shootsize = 25
+	shootsize = 7
 	shootlive = false
-	shootspeed = 70
+	shootspeed = 15
 	gameon = false
-	credits = 1
-
+	credits = 0
 	canAcceptCredits = false
 end
 
